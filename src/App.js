@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+
 import './App.css';
 
+
+
+
+
+
+// import * as THREE from 'three';
+//
+// import { OrbitControls } from './jsm/controls/OrbitControls.js';
+
 function App() {
+
+
+
+
+
+  let socket
+  let connect = (e) =>{
+    socket = new WebSocket("ws://127.0.0.1:3111");
+    socket.onopen = function(e) {
+      alert("[open] Соединение установлено");
+    };
+    socket.onmessage = function(event) {
+      console.log(`[message] Данные получены с сервера: ${event.data}`);
+    };
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <button onClick={connect}></button>
     </div>
   );
 }
